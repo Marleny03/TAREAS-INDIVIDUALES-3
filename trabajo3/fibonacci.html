@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Fibonacci</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .btn-secondary {
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .result-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1>Calculadora Fibonacci</h1>
+        <p>Introduce el número de elementos que deseas calcular:</p>
+        <input type="number" id="fibonacciInput" class="form-control mb-3" placeholder="Número de elementos" />
+        <button onclick="calculateFibonacci()" class="btn btn-primary">Calcular</button>
+        <button onclick="clearResults()" class="btn btn-warning">Limpiar</button>
+        <div id="result" class="result-list"></div>
+        <button onclick="window.location.href='index.html'" class="btn btn-secondary mt-4">Volver al Índice</button>
+    </div>
+
+    <script>
+        function calculateFibonacci() {
+            const n = parseInt(document.getElementById('fibonacciInput').value);
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            if (isNaN(n) || n <= 0) {
+                resultDiv.innerHTML = '<p class="text-danger">Por favor, introduce un número válido.</p>';
+                return;
+            }
+
+            let fib = [0, 1];
+            for (let i = 2; i < n; i++) {
+                fib[i] = fib[i - 1] + fib[i - 2];
+            }
+            resultDiv.innerHTML = '<ul>' + fib.slice(0, n).map(num => `<li>${num}</li>`).join('') + '</ul>';
+        }
+
+        function clearResults() {
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('fibonacciInput').value = '';
+        }
+    </script>
+</body>
+</html>
